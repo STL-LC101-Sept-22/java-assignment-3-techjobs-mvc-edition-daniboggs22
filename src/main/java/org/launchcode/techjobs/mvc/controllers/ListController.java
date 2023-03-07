@@ -35,6 +35,7 @@ public class ListController {
         tableChoices.put("coreCompetency", JobData.getAllCoreCompetency());
     }
 
+    // displays a table of clickable links for the different job categories.
     @GetMapping(value = "")
     public String list(Model model) {
         model.addAttribute("columns", columnChoices);
@@ -47,10 +48,13 @@ public class ListController {
         return "list";
     }
 
+    //displays information for the jobs that relate to a selected category
     @GetMapping(value = "jobs")
-    public String listJobsByColumnAndValue(Model model, @RequestParam String column, @RequestParam(required = false) String value) {
+    public String listJobsByColumnAndValue(Model model, @RequestParam String column, @RequestParam(required = false)
+    String value) {
         ArrayList<Job> jobs;
         if (column.equals("all")){
+
             jobs = JobData.findAll();
             model.addAttribute("title", "All Jobs");
         } else {
